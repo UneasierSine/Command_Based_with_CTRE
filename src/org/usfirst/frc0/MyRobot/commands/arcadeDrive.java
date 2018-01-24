@@ -28,7 +28,8 @@ public class arcadeDrive extends Command {
 
         m_speed = speed;
         m_rotation = rotation;
-        SmartDashboard.putString("Differential Drive", "Speed: " + speed + " Rotation: " + rotation);
+        SmartDashboard.putNumber("Differential Drive Speed", speed);
+        SmartDashboard.putNumber("Differential Drive Rotation", rotation);
     }
 
     // Called just before this Command runs the first time

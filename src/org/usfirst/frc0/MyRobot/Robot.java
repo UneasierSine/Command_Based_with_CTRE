@@ -14,6 +14,7 @@ package org.usfirst.frc0.MyRobot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc0.MyRobot.commands.*;
@@ -36,6 +37,7 @@ public class Robot extends TimedRobot {
     public static claw claw;
     public static verticalLift verticalLift;
 
+    NetworkTableInstance networkTable;
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -55,16 +57,20 @@ public class Robot extends TimedRobot {
         oi = new OI();
 
         // Add commands to Autonomous Sendable Chooser
-            chooser.addDefault("Autonomous Command", new AutonomousCommand());
-
+        chooser.addDefault("Autonomous Command", new AutonomousCommand());
         SmartDashboard.putData("Auto mode", chooser);
+        
+        networkTable.setServer("VisionServer");
+        networkTable.getTable("SmartDashboard");
+        SmartDashboard.putString("Reporter", "Network Table Server initialized.");
+        SmartDashboard.putString("Permission", "Yes");
     }
 
     /**
      * This function is called when the disabled button is hit.
      * You can use it to reset subsystems before shutting down.
      */
-    @Override
+    @Override	
     public void disabledInit(){
 
     }
